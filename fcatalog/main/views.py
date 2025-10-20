@@ -8,3 +8,7 @@ def index(request):
 
 def teacher(request):
     return render(request, "teacher.html")
+
+
+def login(request):
+    return render(request, "login.html")
