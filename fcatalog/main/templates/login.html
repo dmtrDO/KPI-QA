@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +11,13 @@
         <a href="{% url 'index' %}">Back</a>
     </div>
     <br>
-    <form method="POST">
+    <form id="login-form" method="POST">
         {% csrf_token %}
-        <input type="text" placeholder="username or email">
-        <input type="text" placeholder="password">
+        {{ form.email }}
+        {{ form.password }}
         <button type="submit">Login</button>
+        <p class="login-error">{{ error }}</p>
     </form>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
