@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def github_webhook(request):
+    print("test code")
     if request.method == "POST":
         # Запускаємо скрипт оновлення асинхронно
         # some changes
