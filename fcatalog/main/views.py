@@ -14,8 +14,6 @@ def github_webhook(request):
     print("test code")
     if request.method == "POST":
         # Запускаємо скрипт оновлення асинхронно
-        # some changes
-        print("test code")
         subprocess.Popen(["/bin/bash", "/home/librwebapp/update_site.sh"])
         return HttpResponse("Update started", status=200)
     return HttpResponse("OK", status=200)
