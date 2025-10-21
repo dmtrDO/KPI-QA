@@ -1,0 +1,87 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.frame {
+    max-width: 900px;
+    min-width: 200px;
+    margin: auto;
+    width: calc(100% - 30px);
+    height: 100%;
+}
+
+
+
+#general_bar {
+    background-color: rgba(177, 177, 177, 0.8);
+    height: 45px;
+}
+#f_gen_bar {
+    display: flex;
+    align-items: center;
+}
+#f_gen_bar > * {
+    border: solid;
+}
+#f_gen_bar > button {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 26px;
+    border-radius: 5px;
+}
+#menu {
+    
+}
+#logo {
+    margin-left: auto;
+    margin-right: auto;
+}
+#account {
+    
+}
+
+
+
+#content_bar {
+    height: calc(100vh - 75px);
+}
+#f_con_bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+#user_data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#text_auth {
+    margin-bottom: 18px;
+    font-size: 20px;
+}
+#user_data > input {
+    height: 28px;
+    width: 175px;
+    margin-bottom: 12px;
+}
+#b_enter {
+    width: 120px;
+    margin-top: 5px;
+    height: 25px;
+}
+
+
+
+#add_bar {
+    background-color: rgb(213, 213, 213);
+    height: 30px;
+}
+#f_add_bar {
+    display: flex;
+    align-items: center;
+}
+#text_add {
+    
+}
