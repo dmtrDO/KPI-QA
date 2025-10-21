@@ -1,4 +1,3 @@
-from .models import Teacher
 from django.forms import CharField, Form, TextInput
 
 
@@ -9,7 +8,9 @@ class TeacherLoginForm(Form):
                 "id": "email",
                 "placeholder": "Електронна пошта",
             }
-        )
+        ),
+        # щоб джанго не перевіряв сам (перевірку робимо вручну через js)
+        required=False,
     )
     password = CharField(
         widget=TextInput(
@@ -17,5 +18,7 @@ class TeacherLoginForm(Form):
                 "id": "password",
                 "placeholder": "Пароль",
             }
-        )
+        ),
+        # щоб джанго не перевіряв сам (перевірку робимо вручну через js)
+        required=False,
     )
