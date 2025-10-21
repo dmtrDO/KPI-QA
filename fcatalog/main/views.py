@@ -1,7 +1,24 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
 from .models import Teacher, Discipline
 from .forms import TeacherLoginForm
+
+###########################################################################
+# webhook
+import subprocess
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+
+
+@csrf_exempt
+def github_webhook(request):
+    if request.method == "POST":
+        # Запускаємо скрипт оновлення асинхронно
+        subprocess.Popen(["/bin/bash", "/home/librwebapp/update_site.sh"])
+        return HttpResponse("Update started", status=200)
+    return HttpResponse("OK")
+
+
+############################################################################
 
 
 def index(request):
