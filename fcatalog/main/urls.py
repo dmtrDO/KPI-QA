@@ -5,5 +5,5 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("login", views.login, name="login"),
     path("teacher", views.teacher, name="teacher"),
-    path("webhook/", views.github_webhook, name="github_webhook"),
+    path("webhook", views.github_webhook, name="github_webhook"),
 ]
