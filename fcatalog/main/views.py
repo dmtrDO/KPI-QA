@@ -13,6 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 def github_webhook(request):
     if request.method == "POST":
         # Запускаємо скрипт оновлення асинхронно
+        # some changes
         print("test code")
         subprocess.Popen(["/bin/bash", "/home/librwebapp/update_site.sh"])
         return HttpResponse("Update started", status=200)
