@@ -22,8 +22,8 @@ def github_webhook(request):
 ############################################################################
 
 
-def index(request):
-    return render(request, "index.html")
+def general(request):
+    return render(request, "general.html")
 
 
 def teacher(request):
@@ -50,13 +50,14 @@ def login(request):
                 user = Teacher.objects.get(email=email)
                 if user.password == password:
                     request.session["email"] = email
-                    return redirect(
-                        "teacher",
-                    )
+                    return redirect("teacher")
             return render(
                 request,
                 "login.html",
-                {"form": form, "error": "Неправильна пошта або пароль"},
+                {
+                    "form": form,
+                    "error": "Неправильна пошта або пароль"
+                },
             )
 
     return render(

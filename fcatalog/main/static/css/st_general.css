@@ -1,0 +1,161 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.frame {
+    max-width: 900px;
+    min-width: 200px;
+    margin: auto;
+    width: calc(100% - 30px);
+    height: 100%;
+}
+
+
+
+#f_gen_bar > * {
+    border: solid;
+}
+#f_gen_bar > button {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 26px;
+    border-radius: 5px;
+}
+#f_gen_bar > button, #f_gen_bar > form > button {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 26px;
+    border-radius: 5px;
+}
+
+#general_bar {
+    background-color: rgba(177, 177, 177, 0.8);
+    height: 45px;
+}
+#f_gen_bar {
+    display: flex;
+    align-items: center;
+}
+#b_menu {
+    width: 130px;
+    border: none;
+    font-size: 14px;
+}
+#f_logo {
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+}
+#b_logo {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+}
+#f_account {
+    border: none;
+}
+#b_account {
+    width: 130px;
+    border: none;
+    font-size: 14px;
+}
+
+
+
+.pop_up {
+    display: block;
+    align-self: flex-start;
+    padding: 2px 0px 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(239, 239, 239);
+    width: 160px;
+    z-index: 1;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+.pop_up > form {
+    width: calc(100% - 20px);
+}
+.pop_up > form > button {
+    width: calc(100%);
+    display: inline-block;
+    border: none;
+    font-size: 14px;
+    padding: 3px 0 3px 0;
+    margin-top: 6px;
+    text-align: left;
+}
+
+#pop_up_bar {
+    width: 100%;
+    position: fixed;
+}
+#pop_up_wins {
+    margin: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: row;
+
+    max-width: 930px;
+    min-width: 200px;
+    width: 100%;
+}
+#menu_menu {
+    margin-right: auto;
+    visibility: hidden;
+}
+#menu_account {
+    margin-left: auto;
+    visibility: hidden;
+}
+
+
+
+#user_data > input {
+    height: 28px;
+    width: 175px;
+    margin-bottom: 12px;
+}
+
+#content_bar {
+    display: flex;
+    height: calc(100vh - 75px);
+    overflow-x: auto;
+}
+#f_con_bar {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    height: calc(100% - 12px);
+    min-height: 300px;
+}
+#user_data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#text_auth {
+    margin-bottom: 18px;
+    font-size: 20px;
+}
+#b_enter {
+    width: 120px;
+    margin-top: 5px;
+    height: 25px;
+}
+
+
+
+#add_bar {
+    background-color: rgb(213, 213, 213);
+    height: 30px;
+}
+#f_add_bar {
+    display: flex;
+    align-items: center;
+}
+#text_add {
+    font-size: 15px;
+}

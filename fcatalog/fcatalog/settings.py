@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-2p-0!kbv1)xt6&rxr*1zavy11qzv0(uj8b44w=xr6#a)@5u6@b"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True                    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ALLOWED_HOSTS = ["*"]
 
@@ -117,9 +117,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # куди все збирається
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # куди все збирається
+STATIC_ROOT = BASE_DIR / "staticfiles"  # куди все збирається
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),  # де ти зберігаєш свої статичні файли (якщо є)
+    # os.path.join(BASE_DIR, "static"),  # де ти зберігаєш свої статичні файли (якщо є)
+    BASE_DIR / "main/static",  # де ти зберігаєш свої статичні файли (якщо є)
 ]
 
 # Default primary key field type

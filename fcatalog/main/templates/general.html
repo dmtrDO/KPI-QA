@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сторінка входу</title>
-    <link rel="stylesheet" href="{% static 'css/st_login.css' %}">
+    <title>Головна сторінка</title>
+    <link rel="stylesheet" href="{% static 'css/st_general.css' %}">
 </head>
 <body>
     <div id="general_bar">
@@ -14,8 +14,8 @@
             <form id="f_logo" action="{% url 'general' %}">
                 <button id="b_logo">logo or name</button>
             </form>
-            <form id="f_account" action="{% url 'general' %}">
-                <button id="b_account">Назад</button>
+            <form id="f_account" action="{% url 'login' %}">
+                <button id="b_account">Увійти</button>
             </form>
         </div>
     </div>
@@ -31,19 +31,15 @@
                 <form class="menu">
                     <button id="lalka3" type="submit">button 3</button>
                 </form>
+                <form class="menu">
+                    <button id="lalka3" type="submit">button 4</button>
+                </form>
             </div>
         </div>
     </div>
     <div id="content_bar">
         <div class="frame" id="f_con_bar">
-            <form id="user_data" method="POST">
-                {% csrf_token %}
-                <label id="text_auth">Авторизація викладача</label>
-                {{ form.email }}
-                {{ form.password }}
-                <button id="b_enter" type="submit">Далі</button>
-            </form>
-            <p id="error">{{ error }}</p>
+            Це головна сторінка, тут будуть списки дисциплін, які можуть переглядати користувачі
         </div>
     </div>
     <div id="add_bar">
@@ -52,6 +48,6 @@
         </div>
     </div>
 
-    <script src="{% static 'js/skr_login.js' %}"></script>
+    <script src="{% static 'js/skr_general.js' %}"></script>
 </body>
 </html>
