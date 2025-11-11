@@ -1,23 +1,41 @@
+
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        <a href="{% url 'index' %}">Backkk</a>
+
+{% block title %}Login{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/st_entrace.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div id="general_bar">
+        <div class="frame" id="f_gen_bar">
+            <a id="back" href="{% url 'index' %}">Back</a>
+            <button id="menu">menu</button>
+            <button id="logo">logo or name</button>
+            <button id="account">account or autorisation</button>
+        </div>
     </div>
-    <br>
-    <form id="login-form" method="POST">
-        {% csrf_token %}
-        {{ form.email }}
-        {{ form.password }}
-        <button type="submit">Login</button>
-        <p class="login-error">{{ error }}</p>
-    </form>
-    <script src="{% static 'js/script.js' %}"></script>
-</body>
-</html>
+
+    <div id="content_bar">
+        <div class="frame" id="f_con_bar">
+            <form id="login-form" method="POST">
+                {% csrf_token %}
+                <label id="text_auth">Авторизація</label>
+                {{ form.email }}
+                {{ form.password }}
+                <button id="b_enter">Далі</button>
+                <p class="login-error">{{ error }}</p>
+            </form>
+        </div>
+    </div>
+
+    <div id="add_bar">
+        <div class="frame" id="f_add_bar">
+            <label id="text_add">some addition information</label>
+        </div>
+    </div>
+
+{% endblock %}
