@@ -7,10 +7,23 @@
 
 {% block content %}
 
-    <div>
-        Це головна сторінка, тут будуть списки дисциплін, які 
-        можуть переглядати користувачі
-    </div>
     <a href="{% url 'login' %}">login form</a>
+    <br>
+    <p>Список дисциплін (викладач, назва, опис):</p>
+    <hr>
+    <div>
+        {% for discipline in disciplines %}
+            <div>
+                <p>{{ discipline.teacher }}</p>
+                <p>{{ discipline.title }}</p>
+                <p>{{ discipline.description }}</p>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Завантажити</button>
+    </form>
 
 {% endblock %}

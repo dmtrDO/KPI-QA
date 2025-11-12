@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Requested disciplines{% endblock %}
+
+{% block style %}{% endblock %}
+
+{% block content %}
+
+    <a href="admin/">Back</a><br>
+
+    <div>
+        <p>Запити на схвалення дисциплін (ким створено, дата і час створення, назва, опис):</p><hr>
+        <div>
+            {% for discipline in disciplines %}
+                <div>
+                    <p>{{ discipline.teacher }}, {{ discipline.created_date }}</p>
+                    <p>{{ discipline.title }}</p>
+                    <p>{{ discipline.description }}</p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="discipline_id" value="{{ discipline.id }}">
+                        <button type="submit" name="action" value="approve">Прийняти</button>
+                        <button type="submit" name="action" value="reject">Відхилити</button>
+                    </form>
+                </div><hr>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -3,6 +3,11 @@ from .models import Teacher, Discipline
 from .forms import TeacherLoginForm, AddDisciplineForm
 from django.contrib.auth.models import User
 
+from django.http import HttpResponse
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+
+
 ###########################################################################
 # webhook
 import subprocess
@@ -25,9 +30,37 @@ def github_webhook(request):
 
 def index(request):
     disciplines = Discipline.objects.filter(is_approved=True)
-    for discipline in disciplines:
-        print(discipline)
-    return render(request, "index.html")
+    if request.method == "POST":
+        response = HttpResponse(content_type="application/pdf")
+        response["Content-Disposition"] = 'attachment; filename="discipline_list.pdf"'
+
+        p = canvas.Canvas(response, pagesize=A4)
+        width, height = A4
+        y = height - 80
+
+        p.setFont("Helvetica-Bold", 16)
+        p.drawString(100, y, "Список затверджених дисциплін")
+        y -= 40
+
+        p.setFont("Helvetica", 12)
+        for d in disciplines:
+            p.drawString(80, y, f"Назва: {d.title}")
+            y -= 20
+            p.drawString(80, y, f"Опис: {d.description}")
+            y -= 20
+            p.drawString(80, y, f"Викладач: {d.teacher.email}")
+            y -= 40
+
+            # якщо місце закінчується — створюємо нову сторінку
+            if y < 100:
+                p.showPage()
+                y = height - 80
+                p.setFont("Helvetica", 12)
+
+        p.showPage()
+        p.save()
+        return response
+    return render(request, "index.html", {"disciplines": disciplines})
 
 
 def teacher(request):
@@ -101,3 +134,17 @@ def login(request):
 def logout(request):
     request.session.flush()
     return redirect("/")
+
+
+def discipline_requests(request):
+    if request.method == "POST":
+        action = request.POST.get("action")
+        discipline = Discipline.objects.get(id=request.POST.get("discipline_id"))
+        if action == "approve":
+            discipline.is_approved = True
+            discipline.save()
+        elif action == "reject":
+            discipline.is_approved = False
+            discipline.delete()
+    disciplines = Discipline.objects.filter(is_approved=False)
+    return render(request, "discipline_requests.html", {"disciplines": disciplines})
