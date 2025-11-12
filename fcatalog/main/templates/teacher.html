@@ -3,12 +3,38 @@
 
 {% block title %}Teacher{% endblock %}
 
-{% block style %}{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/teacher.css' %}">
+{% endblock %}
 
 {% block content %}
 
-    {{ email }}
-    <br>
-    Тут кабінет викладача
+    <div class="teacher-navigation">
+        <div>
+        {{ email }}
+        </div>
+        <div>
+            <button type="reset" class="update-btn" onclick="openPopup()">
+                Додати дисципліну            
+            </button>
+        </div>
+        <div>
+            <a id="logout" href="{% url 'logout' %}">Вийти</a>
+        </div>
+    </div>
+
+    <div class="popup" id="popup">
+        <div class="popup__body">
+            <form method="POST" class="popup__content">
+                {% csrf_token %}
+                <label for="id_title">Назва:</label>
+                {{ form.title }}
+                <label for="id_description">Опис:</label>
+                {{ form.description }}
+                <button type="submit">Додати</button>
+                <p class="err">{{ error }}</p>
+            </form>
+        </div>
+    </div>
 
 {% endblock %}

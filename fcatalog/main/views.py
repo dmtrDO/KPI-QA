@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from .models import Teacher, Discipline
-from .forms import TeacherLoginForm
+from .forms import TeacherLoginForm, AddDisciplineForm
+from django.contrib.auth.models import User
 
 ###########################################################################
 # webhook
@@ -23,6 +24,9 @@ def github_webhook(request):
 
 
 def index(request):
+    disciplines = Discipline.objects.filter(is_approved=True)
+    for discipline in disciplines:
+        print(discipline)
     return render(request, "index.html")
 
 
@@ -30,11 +34,37 @@ def teacher(request):
     email = request.session.get("email")
     if not email or not Teacher.objects.filter(email=email).exists():
         return redirect("login")
+    form = AddDisciplineForm()
+    if request.method == "POST":
+        form = AddDisciplineForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            disciplines = Discipline.objects.filter(title=title)
+            for discipline in disciplines:
+                if discipline.is_approved == True:
+                    return render(
+                        request,
+                        "teacher.html",
+                        {
+                            "email": email,
+                            "form": form,
+                            "error": "Така дисципліна вже існує",
+                        },
+                    )
+            description = form.cleaned_data["description"]
+            Discipline.objects.create(
+                title=title,
+                description=description,
+                teacher=Teacher.objects.get(email=email),
+                admin=User.objects.get(id=1),
+            )
+
     return render(
         request,
         "teacher.html",
         {
             "email": email,
+            "form": form,
         },
     )
 
@@ -66,3 +96,8 @@ def login(request):
             "form": form,
         },
     )
+
+
+def logout(request):
+    request.session.flush()
+    return redirect("/")

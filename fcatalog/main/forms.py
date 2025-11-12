@@ -1,4 +1,4 @@
-from django.forms import CharField, Form, TextInput
+from django.forms import CharField, Form, TextInput, Textarea
 
 
 class TeacherLoginForm(Form):
@@ -21,4 +21,20 @@ class TeacherLoginForm(Form):
         ),
         # щоб джанго не перевіряв сам (перевірку робимо вручну через js)
         required=False,
+    )
+
+
+class AddDisciplineForm(Form):
+    title = CharField(
+        widget=TextInput(attrs={}),
+        required=True,
+    )
+
+    description = CharField(
+        widget=Textarea(
+            attrs={
+                "rows": 5,
+            }
+        ),
+        required=True,
     )

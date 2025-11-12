@@ -32,3 +32,19 @@ function validateForm(form) {
 const form = document.getElementById("login-form");
 
 validateForm(form);
+
+function openPopup() {
+    document.body.classList.add('lock')
+    const popup = document.getElementById('popup');
+    popup.classList.add('active');
+    popup.addEventListener('click', (e) => {
+        if (!e.target.closest('.popup__content')) {
+            closePopup();
+        }
+    })
+}
+
+function closePopup() {
+    document.querySelector(".popup").classList.remove("active");
+    document.body.classList.remove('lock');
+}
