@@ -5,18 +5,16 @@ from django.contrib.auth.models import User
 
 from django.http import HttpResponse, FileResponse
 from reportlab.lib.pagesizes import A4
-from reportlab.pdfgen import canvas
+from reportlab.lib.styles import ParagraphStyle
 import io
 from reportlab.platypus import (
     SimpleDocTemplate,
-    Table,
+    LongTable,
     TableStyle,
     Paragraph,
-    Spacer,
     PageBreak,
 )
 from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.ttfonts import TTFont
@@ -47,6 +45,14 @@ def download(disciplines):
     elements = []
     styles = getSampleStyleSheet()
 
+    styles.add(
+        ParagraphStyle(
+            name="Wrapped",
+            parent=styles["Normal"],
+            wordWrap="CJK",  # або "RTL" або "LTR" — але CJK найкраще переносить довгі рядки
+        )
+    )
+
     styles["Normal"].fontName = "DejaVuSerif"
     styles["Heading2"].fontName = "DejaVuSerif"
     pdfmetrics.registerFont(TTFont("DejaVuSerif", "DejaVuSerif.ttf", "UTF-8"))
@@ -58,9 +64,14 @@ def download(disciplines):
     data1 = [["Викладач", "Назва дисципліни"]]
     for d in disciplines:
         link = f'<a href="#{d.id}">{d.title}</a>'
-        data1.append([d.teacher.email, Paragraph(link, styles["Normal"])])
+        data1.append(
+            [
+                Paragraph(d.teacher.email, styles["Wrapped"]),
+                Paragraph(link, styles["Normal"]),
+            ]
+        )
 
-    table1 = Table(data1, repeatRows=1)
+    table1 = LongTable(data1, repeatRows=1, colWidths=[150, 350])
     table1.setStyle(
         TableStyle(
             [
@@ -81,18 +92,30 @@ def download(disciplines):
             "<b>Таблиця 2. Викладач - Назва - Опис дисципліни</b>", styles["Heading2"]
         )
     )
-    data2 = [["Викладач", "Назва", "Опис дисципліни"]]
+    data2 = [["№", "Викладач", "Назва", "Опис дисципліни"]]
+    counter = 0
     for d in disciplines:
+        counter += 1
         title_with_anchor = f'<a name="{d.id}"/>{d.title}'
-        data2.append(
-            [
-                d.teacher.email,
-                Paragraph(title_with_anchor, styles["Normal"]),
-                d.description,
-            ]
-        )
+        description = d.description
+        chunk_size = 1000
+        for i in range(0, len(description), chunk_size):
+            if len(description) < chunk_size:
+                chunk = description
+            else:
+                chunk = description[i : i + chunk_size]
+            if i > 0:
+                title_with_anchor = f"{d.title}"
+            data2.append(
+                [
+                    Paragraph(str(counter), styles["Normal"]),
+                    Paragraph(d.teacher.email, styles["Wrapped"]),
+                    Paragraph(title_with_anchor, styles["Normal"]),
+                    Paragraph(chunk, styles["Normal"]),
+                ]
+            )
 
-    table2 = Table(data2, repeatRows=1, colWidths=[120, 150, 220])
+    table2 = LongTable(data2, repeatRows=1, colWidths=[40, 80, 120, 260])
     table2.setStyle(
         TableStyle(
             [
