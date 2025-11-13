@@ -3,10 +3,23 @@ from .models import Teacher, Discipline
 from .forms import TeacherLoginForm, AddDisciplineForm
 from django.contrib.auth.models import User
 
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
-
+import io
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Table,
+    TableStyle,
+    Paragraph,
+    Spacer,
+    PageBreak,
+)
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.pdfbase.ttfonts import TTFont
 
 ###########################################################################
 # webhook
@@ -28,38 +41,82 @@ def github_webhook(request):
 ############################################################################
 
 
+def download(disciplines):
+    buffer = io.BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=A4)
+    elements = []
+    styles = getSampleStyleSheet()
+
+    styles["Normal"].fontName = "DejaVuSerif"
+    styles["Heading2"].fontName = "DejaVuSerif"
+    pdfmetrics.registerFont(TTFont("DejaVuSerif", "DejaVuSerif.ttf", "UTF-8"))
+
+    # Заголовок
+    elements.append(
+        Paragraph("<b>Таблиця 1. Викладач - Назва дисципліни</b>", styles["Heading2"])
+    )
+    data1 = [["Викладач", "Назва дисципліни"]]
+    for d in disciplines:
+        link = f'<a href="#{d.id}">{d.title}</a>'
+        data1.append([d.teacher.email, Paragraph(link, styles["Normal"])])
+
+    table1 = Table(data1, repeatRows=1)
+    table1.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, 0), colors.lightblue),
+                ("GRID", (0, 0), (-1, -1), 1, colors.black),
+                ("FONTNAME", (0, 0), (-1, 0), "DejaVuSerif"),
+                ("ALIGN", (0, 0), (-1, -1), "LEFT"),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ]
+        )
+    )
+    elements.append(table1)
+    elements.append(PageBreak())
+
+    # Друга таблиця
+    elements.append(
+        Paragraph(
+            "<b>Таблиця 2. Викладач - Назва - Опис дисципліни</b>", styles["Heading2"]
+        )
+    )
+    data2 = [["Викладач", "Назва", "Опис дисципліни"]]
+    for d in disciplines:
+        title_with_anchor = f'<a name="{d.id}"/>{d.title}'
+        data2.append(
+            [
+                d.teacher.email,
+                Paragraph(title_with_anchor, styles["Normal"]),
+                d.description,
+            ]
+        )
+
+    table2 = Table(data2, repeatRows=1, colWidths=[120, 150, 220])
+    table2.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, 0), colors.lightgrey),
+                ("GRID", (0, 0), (-1, -1), 1, colors.black),
+                ("FONTNAME", (0, 0), (-1, 0), "DejaVuSerif"),
+                ("ALIGN", (0, 0), (-1, -1), "LEFT"),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ]
+        )
+    )
+    elements.append(table2)
+
+    # Створення PDF
+    doc.build(elements)
+    buffer.seek(0)
+
+    return FileResponse(buffer, as_attachment=True, filename="disciplines-catalog.pdf")
+
+
 def index(request):
     disciplines = Discipline.objects.filter(is_approved=True)
     if request.method == "POST":
-        response = HttpResponse(content_type="application/pdf")
-        response["Content-Disposition"] = 'attachment; filename="discipline_list.pdf"'
-
-        p = canvas.Canvas(response, pagesize=A4)
-        width, height = A4
-        y = height - 80
-
-        p.setFont("Helvetica-Bold", 16)
-        p.drawString(100, y, "Список затверджених дисциплін")
-        y -= 40
-
-        p.setFont("Helvetica", 12)
-        for d in disciplines:
-            p.drawString(80, y, f"Назва: {d.title}")
-            y -= 20
-            p.drawString(80, y, f"Опис: {d.description}")
-            y -= 20
-            p.drawString(80, y, f"Викладач: {d.teacher.email}")
-            y -= 40
-
-            # якщо місце закінчується — створюємо нову сторінку
-            if y < 100:
-                p.showPage()
-                y = height - 80
-                p.setFont("Helvetica", 12)
-
-        p.showPage()
-        p.save()
-        return response
+        return download(disciplines)
     return render(request, "index.html", {"disciplines": disciplines})
 
 
