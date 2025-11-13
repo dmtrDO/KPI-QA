@@ -119,7 +119,9 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # куди все збирається
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),  # де ти зберігаєш свої статичні файли (якщо є)
+    os.path.join(
+        BASE_DIR, "main", "static"
+    ),  # де ти зберігаєш свої статичні файли (якщо є)
 ]
 
 # Default primary key field type
