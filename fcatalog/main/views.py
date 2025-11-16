@@ -49,7 +49,7 @@ def download(disciplines):
         ParagraphStyle(
             name="Wrapped",
             parent=styles["Normal"],
-            wordWrap="CJK",  # або "RTL" або "LTR" — але CJK найкраще переносить довгі рядки
+            wordWrap="CJK",
         )
     )
 
