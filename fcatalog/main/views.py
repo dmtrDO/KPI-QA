@@ -136,6 +136,7 @@ def download(disciplines):
     return FileResponse(buffer, as_attachment=True, filename="disciplines-catalog.pdf")
 
 
+@csrf_exempt
 def index(request):
     disciplines = Discipline.objects.filter(is_approved=True)
     if request.method == "POST":

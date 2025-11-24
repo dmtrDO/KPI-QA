@@ -14,8 +14,7 @@ class TestViews(TestCase):
     @patch("main.views.Discipline.objects.all")
     def test_download_with_mock(self, mock_all):
         mock_all.return_value = [MagicMock(), MagicMock()]
-        disciplines = Discipline.objects.all()
-        self.assertIsInstance(download(disciplines), FileResponse)
+        self.assertIsInstance(download(mock_all), FileResponse)
 
     def test_logged_teacher(self):
         self.teacher = Teacher.objects.create(email="teach@gmail.com", password="12345")
