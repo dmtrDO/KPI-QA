@@ -3,15 +3,28 @@
 
 {% block title %}Fcatalog{% endblock %}
 
-{% block style %}{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
 
 {% block content %}
 
-    <a href="{% url 'login' %}">login form</a>
-    <br>
-    <p>Список дисциплін (викладач, назва, опис):</p>
+    <header>
+        <div>
+            <p class="text_discipline">Список дисциплін (викладач, назва, опис):</p>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="download">Завантажити</button>
+            </form>
+            <input type="text" id="input_search" placeholder="Введіть те, що шукаєте">
+            <button id="search">Пошук</button>
+        </div>
+        <div class="login">
+             <a href="{% url 'login' %}">login form</a>
+        </div>
+    </header>
     <hr>
-    <div>
+    <div id="disciplines_container">
         {% for discipline in disciplines %}
             <div>
                 <p>{{ discipline.teacher }}</p>
@@ -21,9 +34,19 @@
             <hr>
         {% endfor %}
     </div>
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit">Завантажити</button>
-    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+    <script>
+        const disciplines = [
+            {% for d in disciplines %}
+            {
+                teacher: "{{ d.teacher|escapejs }}",
+                title: "{{ d.title|escapejs }}",
+                description: "{{ d.description|escapejs }}"
+            },
+            {% endfor %}
+        ];
+    </script>
+
 
 {% endblock %}
