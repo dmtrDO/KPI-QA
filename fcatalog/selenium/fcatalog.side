@@ -1,0 +1,224 @@
+{
+  "id": "4d37d166-d87b-4981-83d0-ebd6aade93b4",
+  "version": "2.0",
+  "name": "fcatalog",
+  "url": "https://librwebapp.pythonanywhere.com/",
+  "tests": [{
+    "id": "be487b15-ac77-4dda-a299-14b691b7362e",
+    "name": "test1",
+    "commands": [{
+      "id": "b0e5dfc1-5ee1-46d1-8f0b-71261993d94b",
+      "comment": "",
+      "command": "open",
+      "target": "https://librwebapp.pythonanywhere.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "87aa53d5-fd19-4bd2-a8a5-eecc98423eb0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "781x692",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "53093fe3-2f12-4767-8207-5b3cf6c03d87",
+      "comment": "",
+      "command": "click",
+      "target": "id=input_search",
+      "targets": [
+        ["id=input_search", "id"],
+        ["css=#input_search", "css:finder"],
+        ["xpath=//input[@id='input_search']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "76cf871c-928e-4205-b8a2-436e95d31d4f",
+      "comment": "",
+      "command": "type",
+      "target": "id=input_search",
+      "targets": [
+        ["id=input_search", "id"],
+        ["css=#input_search", "css:finder"],
+        ["xpath=//input[@id='input_search']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "ас"
+    }, {
+      "id": "fd3f7d16-14ec-4d8d-b183-949b8950a58d",
+      "comment": "",
+      "command": "click",
+      "target": "id=search",
+      "targets": [
+        ["id=search", "id"],
+        ["css=#search", "css:finder"],
+        ["xpath=//button[@id='search']", "xpath:attributes"],
+        ["xpath=//div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Пошук')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4e9d5d0b-f568-448a-8664-f0fecca1f830",
+      "comment": "",
+      "command": "click",
+      "target": "id=input_search",
+      "targets": [
+        ["id=input_search", "id"],
+        ["css=#input_search", "css:finder"],
+        ["xpath=//input[@id='input_search']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7a3a3592-66b8-4a82-9d1e-e99a8a4a4dc1",
+      "comment": "",
+      "command": "type",
+      "target": "id=input_search",
+      "targets": [
+        ["id=input_search", "id"],
+        ["css=#input_search", "css:finder"],
+        ["xpath=//input[@id='input_search']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5409610e-8d39-4c56-ab72-bc322c22a42b",
+      "comment": "",
+      "command": "click",
+      "target": "id=search",
+      "targets": [
+        ["id=search", "id"],
+        ["css=#search", "css:finder"],
+        ["xpath=//button[@id='search']", "xpath:attributes"],
+        ["xpath=//div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Пошук')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "259f1846-3e90-4a90-a516-3c09240b1910",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=login form",
+      "targets": [
+        ["linkText=login form", "linkText"],
+        ["css=a", "css:finder"],
+        ["xpath=//a[contains(text(),'login form')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'login form')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "359c43b5-8fef-428f-8595-0f0ef062c4b2",
+      "comment": "",
+      "command": "click",
+      "target": "id=back",
+      "targets": [
+        ["id=back", "id"],
+        ["linkText=Back", "linkText"],
+        ["css=#back", "css:finder"],
+        ["xpath=//a[contains(text(),'Back')]", "xpath:link"],
+        ["xpath=//a[@id='back']", "xpath:attributes"],
+        ["xpath=//div[@id='f_gen_bar']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Back')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b9f86511-e635-457c-a589-79e180038754",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=login form",
+      "targets": [
+        ["linkText=login form", "linkText"],
+        ["css=a", "css:finder"],
+        ["xpath=//a[contains(text(),'login form')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'login form')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1e6594af-6a88-4ab6-84c5-d1d4d1ba6880",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "34525a26-ccf4-46b3-bfbe-d5056bbaff16",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "teacher@gmail.com"
+    }, {
+      "id": "a3fb7c6c-734d-4758-992d-f9ffbdd5fc65",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c5267f95-66ba-4e24-98f3-0653e372afa5",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "123"
+    }, {
+      "id": "d9752bde-24a5-4a7b-9879-fe06fa8e08e6",
+      "comment": "",
+      "command": "click",
+      "target": "id=b_enter",
+      "targets": [
+        ["id=b_enter", "id"],
+        ["css=#b_enter", "css:finder"],
+        ["xpath=//button[@id='b_enter']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Далі')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "afccbb4b-aa8d-46c3-b9cd-95d31703da9f",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": [],
+  "plugins": []
+}
