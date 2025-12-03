@@ -1,4 +1,4 @@
-from django.forms import CharField, Form, TextInput, Textarea
+from django.forms import CharField, Form, TextInput, Textarea, PasswordInput
 
 
 class TeacherLoginForm(Form):
@@ -13,7 +13,7 @@ class TeacherLoginForm(Form):
         required=False,
     )
     password = CharField(
-        widget=TextInput(
+        widget=PasswordInput(
             attrs={
                 "id": "password",
                 "placeholder": "Пароль",
