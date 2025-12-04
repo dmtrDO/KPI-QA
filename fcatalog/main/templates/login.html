@@ -1,5 +1,48 @@
+
+{% extends 'base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
+
+{% block title %}Login{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/st_entrace.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="general_bar">
+        <div class="frame" id="f_gen_bar">
+            <a id="back" href="{% url 'index' %}">Back</a>
+            <button id="menu">menu</button>
+            <button id="logo">logo or name</button>
+            <button id="account">account or autorisation</button>
+        </div>
+    </div>
+
+    <div id="content_bar">
+        <div class="frame" id="f_con_bar">
+            <form id="login-form" method="POST">
+                {% csrf_token %}
+                <label id="text_auth">Авторизація</label>
+                {{ form.email }}
+                {{ form.password }}
+                <button id="b_enter">Далі</button>
+                <p class="login-error">{{ error }}</p>
+            </form>
+        </div>
+    </div>
+
+    <div id="add_bar">
+        <div class="frame" id="f_add_bar">
+            <label id="text_add">some addition information</label>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -45,13 +88,7 @@
             </form>
             <p id="error">{{ error }}</p>
         </div>
-    </div>
-    <div id="add_bar">
-        <div class="frame" id="f_add_bar">
-            <label id="text_add">some addition information</label>
-        </div>
-    </div>
-
-    <script src="{% static 'js/skr_login.js' %}"></script>
+    </div> -->
+    <!-- <script src="{% static 'js/skr_login.js' %}"></script>
 </body>
-</html>
+</html> -->

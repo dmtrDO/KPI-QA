@@ -15,15 +15,8 @@ class Discipline(models.Model):
     description = models.CharField(max_length=500)
     created_date = models.DateTimeField(auto_now_add=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    approved_date = models.DateTimeField(null=True, blank=True)
+    is_approved = models.BooleanField(default=False)
     admin = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
-
-
-class RequestedDiscipline(models.Model):
-    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.discipline.title
