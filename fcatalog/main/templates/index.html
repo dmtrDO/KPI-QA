@@ -25,14 +25,16 @@
     </header>
     <hr>
     <div id="disciplines_container">
-        {% for discipline in disciplines %}
-            <div>
-                <p>{{ discipline.teacher }}</p>
-                <p>{{ discipline.title }}</p>
-                <p>{{ discipline.description }}</p>
-            </div>
-            <hr>
-        {% endfor %}
+        {% if disciplines %}
+            {% for discipline in disciplines %}
+                <div>
+                    <p>{{ discipline.teacher }}</p>
+                    <p>{{ discipline.title }}</p>
+                    <p>{{ discipline.description }}</p>
+                </div>
+                <hr>
+            {% endfor %}
+        {% endif %}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
