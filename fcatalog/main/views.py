@@ -142,6 +142,7 @@ def download(disciplines):
 @csrf_exempt
 def index(request):
     disciplines = Discipline.objects.filter(is_approved=True)
+    # print(disciplines)
     if request.method == "POST":
         return download(disciplines)
     return render(request, "index.html", {"disciplines": disciplines})
@@ -161,7 +162,7 @@ def teacher(request):
                 if discipline.is_approved == True:
                     return render(
                         request,
-                        "teacher.html",
+                        "new_teacher.html",
                         {
                             "email": email,
                             "form": form,
@@ -178,7 +179,7 @@ def teacher(request):
 
     return render(
         request,
-        "teacher.html",
+        "new_teacher.html",
         {
             "email": email,
             "form": form,
@@ -233,3 +234,10 @@ def discipline_requests(request):
             discipline.delete()
     disciplines = Discipline.objects.filter(is_approved=False)
     return render(request, "discipline_requests.html", {"disciplines": disciplines})
+
+
+
+
+
+def test_exec(request):
+    return render(request,"new_teacher.html")
