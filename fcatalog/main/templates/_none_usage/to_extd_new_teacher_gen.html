@@ -3,6 +3,7 @@
 <!-- form v1 -->
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +16,7 @@
     <div id="general_bar">
         <div class="frame" id="f_gen_bar">
             <button id="b_menu" class="gen_butt">Меню</button>
-            <form id="f_logo" action="">
+            <form id="f_logo" action="{% url 'teacher' %}">
                 <button id="b_logo">logo or name</button>
             </form>
             <button id="b_account" class="gen_butt">Обліковий запис</button>
@@ -26,10 +27,10 @@
     <div id="pop_up_bar">
         <div id="pop_up_wins">
             <div id="menu_menu" class="pop_up">
-                <form class="menu">
+                <form class="menu" action="{% url 'teacher' %}">
                     <button id="lalka1" type="submit">На головну</button>
                 </form>
-                <form class="menu">
+                <form class="menu" action="{% url 'teacher_discips' %}">
                     <button id="lalka3" type="submit">Спеціальності</button>
                 </form>
                 <form class="menu">
@@ -55,7 +56,7 @@
             <div id="second_bar">
                 <div id="secb_ref_block">
                     <label class="secbb_ref_item">Викладач</label>
-                    > <a class="secbb_ref_item" href="">Головна</a>
+                    > <a class="secbb_ref_item" href="{% url 'teacher' %}">Головна</a>
                 </div>
                 <!-- <button id="secb_b0" class="secb_b">but0</button> -->
                 <!-- <form id="secb_right_form" action="">
@@ -78,13 +79,14 @@
 
                 <div class="enum_blocks">
                     <div class="enum_block_shape enum_block_padding enum_first_block">
-                        <form class="enum_block_shape">
-                            <button class="item_block it_bl_st">bl1</button>
-                            <button class="item_block it_bl_st">bl2</button>
-                            <button class="item_block it_bl_st">bl3</button>
-                            <form class="enum_extra_buttons_block">
-                                <button class="enum_extra_button">All disciplines<br> &gt&gt</button>
-                            </form>
+                        <form method="POST" class="enum_block_shape">
+                            {% csrf_token %}
+                            {% if disciplines %}
+                                {% for el in disciplines %}
+                                    <button name="id" value="12345678" class="item_block it_bl_st">{{el}}</button>
+                                {% endfor %}
+                            {% endif %}
+                            <button name="next_page" value="discips" class="enum_extra_button">All disciplines<br> &gt&gt</button>
                         </form>
                     </div>
                 </div>

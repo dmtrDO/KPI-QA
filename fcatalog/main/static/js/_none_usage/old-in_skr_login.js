@@ -62,6 +62,7 @@ if (form) {
 }
 
 function openPopup() {
+    console.log("adada")
     document.body.classList.add('lock')
     const popup = document.getElementById('popup');
     popup.classList.add('active');
@@ -73,6 +74,7 @@ function openPopup() {
 }
 
 function closePopup() {
+    console.log("nnanananan")
     document.querySelector(".popup").classList.remove("active");
     document.body.classList.remove('lock');
 }

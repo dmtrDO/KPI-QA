@@ -9,17 +9,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Всі дисципліни</title>
-    <link rel="stylesheet" href="{% static 'css/new_st_teacher_choo.css' %}">
+    <title>Дисципліни</title>
+    <link rel="stylesheet" href="{% static 'css/new_st_general_discips.css' %}">
 </head>
 <body>
     <div id="general_bar">
         <div class="frame" id="f_gen_bar">
             <button id="b_menu" class="gen_butt">Меню</button>
-            <form id="f_logo" action="{% url 'teacher_discips' %}">
-                <button id="b_logo">Fcatalog</button>
+            <form id="f_logo" action="">
+                <button id="b_logo">logo or name</button>
             </form>
-            <button id="b_account" class="gen_butt">Обліковий запис</button>
+            <button id="b_account" class="gen_butt">Увійти</button>
         </div>
     </div>
 
@@ -27,21 +27,29 @@
     <div id="pop_up_bar">
         <div id="pop_up_wins">
             <div id="menu_menu" class="pop_up">
-                <form class="menu" action="{% url 'teacher_discips' %}">
+                <form class="menu" action="">
                     <button class="lalka" type="submit">На головну</button>
                 </form>
-                <button type="reset" class="lalka update-btn" onclick="openPopup()">Додати дисципліну</button>
-                <!-- <div class="border_pup"></div>
+                <!-- <form class="menu" action="">
+                    <button class="lalka" type="submit">Назад</button>
+                </form> -->
+                <!-- <form class="menu">
+                    <button class="lalka" type="submit">Додати дисципліну</button>
+                </form> -->
+                <div class="border_pup"></div>
                 <form class="menu">
                     <button class="lalka" type="submit">Про нас</button>
-                </form> -->
+                </form>
             </div>
-            <div id="menu_account" class="pop_up">
+            <!-- <div id="menu_account" class="pop_up">
                 <div class="account">teacher2@gmail.com</div>
+                <form class="account">
+                    <button id="palka1">Профіль</button>
+                </form>
                 <form class="account" action="{% url 'logout' %}">
                     <button id="palka2">Вийти</button>
                 </form>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -50,17 +58,30 @@
         <div class="frame" id="f_con_bar">
             <div id="second_bar">
                 <div id="secb_ref_block">
-                    <label class="secbb_ref_item">Викладач</label>
+                    <label class="secbb_ref_item">Головна</label>
                     > <a class="secbb_ref_item" href="{% url 'teacher_discips' %}">Дисципліни</a>
                 </div>
-                <button type="reset" class="secb_b update-btn" onclick="openPopup()">Додати дисципліну</button>
+                <!-- <form id="secb_right_form" action="">
+                    <input type="text" title="a;df;a;df;sd;f;sd">
+                    <button id="secb_b0" class="secb_b">Знайти</button>
+                </form> -->
+                <!-- <form id="secb_right_form">
+                    <button id="secb_b1" class="secb_b">Додати дисципліну</button>
+                </form> -->
                 <form id="secb_right_form" method="POST">
                     {% csrf_token %}
                     <button id="secb_b2" name="type_out" value="-" class="secb_b">Вигляд</button>
                 </form>
+                <!-- <form id="secb_right_form" action="">
+                    <button id="secb_b1" class="secb_b">Назад</button>
+                </form> -->
             </div>
 
-            <div class="content">
+            <div class="content">                           <!-- Клас заглушка -->
+                <!-- <div class="info">
+                    Тут кабінет викладача
+                </div> -->
+
                 <div class="title1">
                     <label class="text">
                         Всі ваші дисципліни
@@ -69,7 +90,7 @@
                 </div>
 
                 {% if type_out is 0 %}
-                <div class="enum_blocks">
+                <div class="enum_blocks">                   <!-- Клас заглушка -->
                     {% if disciplines %}
                         {% for el_arr in disciplines %}
                             <div class="enum_block_shape enum_block_padding">
@@ -116,22 +137,6 @@
             </div>
         </div>
 
-
-        <div class="popup" id="popup">
-            <div class="popup__body">
-                <form method="POST" class="popup__content">
-                    {% csrf_token %}
-                    <input type="hidden" name="next_page" value="new_discipline">
-                    <label for="id_title">Назва:</label>
-                    {{ form.title }}
-                    <label for="id_description">Опис:</label>
-                    {{ form.description }}
-                    <button class="in_add_disc" type="submit">Додати</button>
-                    <p class="err">{{ error }}</p>
-                </form>
-            </div>
-        </div>
-
         
         <div class="space_end"></div>
     </div>
@@ -139,11 +144,11 @@
 
     <div id="add_bar">
         <div class="frame" id="f_add_bar">
-            <label id="text_add">Київ - 2025</label>
+            <label id="text_add">some addition information</label>
         </div>
     </div>
 
 
-    <script src="{% static 'js/new_skr_teacher_choo.js' %}"></script>
+    <script src="{% static 'js/new_skr_general_discips.js' %}"></script>
 </body>
 </html>

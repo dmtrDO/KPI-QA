@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Fcatalog{% endblock %}
+
+{% block title %}Головна{% endblock %}
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock %}
 
 {% block content %}
-
     <header>
         <div>
             <p class="text_discipline">Список дисциплін (викладач, назва, опис):</p>
@@ -23,7 +23,9 @@
              <a href="{% url 'login' %}">login form</a>
         </div>
     </header>
+
     <hr>
+
     <div id="disciplines_container">
         {% if disciplines %}
             {% for discipline in disciplines %}
@@ -37,6 +39,7 @@
         {% endif %}
     </div>
 
+
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
     <script>
         const disciplines = [
@@ -49,6 +52,5 @@
             {% endfor %}
         ];
     </script>
-
-
+    <script src="{% static 'js/skr_index.js' %}"></script>
 {% endblock %}

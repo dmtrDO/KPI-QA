@@ -1,13 +1,12 @@
 
 const butt_menu = document.getElementById('b_menu');
-const butt_account = document.getElementById('b_account');
 const menu = document.getElementById('menu_menu');
-const account = document.getElementById('menu_account');
 const pop_up_bar = document.getElementById('pop_up_bar');
 const pop_up_wins = document.getElementById('pop_up_wins');
 
 document.addEventListener('click', function(e) {
     const type_click = e.target.tagName;
+    // console.log(type_click);
     if (type_click!='BUTTON') {
         pop_up_bar.style.zIndex = '-1';
         pop_up_wins.style.zIndex = '-1';
@@ -34,26 +33,10 @@ butt_menu.addEventListener('click', () => {
     }
 });
 
-butt_account.addEventListener('click', () => {
-    if (account.style.visibility=='hidden') {
-        pop_up_bar.style.zIndex = '100';
-        pop_up_wins.style.zIndex = '100';
-        account.style.visibility = 'visible';
-        menu.style.visibility = 'hidden';
-    } else if (account.style.visibility=='visible') {
-        pop_up_bar.style.zIndex = '-1';
-        pop_up_wins.style.zIndex = '-1';
-        account.style.visibility = 'hidden';
-    } else {
-        pop_up_bar.style.zIndex = '100';
-        pop_up_wins.style.zIndex = '100';
-        account.style.visibility = 'visible';
-        menu.style.visibility = 'hidden';
-    }
-});
 
 
 
+// Нове
 function openPopup() {
     document.body.classList.add('lock')
     const popup = document.getElementById('popup');
@@ -63,9 +46,11 @@ function openPopup() {
             closePopup();
         }
     });
+    console.log("allalalalal");
 }
 
 function closePopup() {
     document.querySelector(".popup").classList.remove("active");
     document.body.classList.remove('lock');
+    console.log("nanannanana");
 }

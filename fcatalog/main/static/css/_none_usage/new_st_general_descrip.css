@@ -6,6 +6,8 @@
 }
 
 .frame {
+    /* display: inline-block; */
+    /* border: solid; */
     max-width: 900px;
     min-width: 500px;
     margin: auto;
@@ -27,6 +29,9 @@
     display: flex;
     align-items: center;
 }
+/* #f_gen_bar > * {
+    border: solid;
+} */
 #f_gen_bar > button {
     /* border: solid; */
     padding-left: 10px;
@@ -66,8 +71,10 @@
 
 /* POPUP BAR */
 .pop_up {
+    /* border: solid; */
+    /* height: 400px; */
     display: block;
-    align-self: flex-start;
+    align-self: flex-start;                 /* потужно */
     padding: 7px 0px 7px 0px;
     display: flex;
     flex-direction: column;
@@ -86,16 +93,17 @@
 }
 .pop_up > form {
     width: calc(100% - 20px);
+    /* margin: 4px 0 4px 0; */
+    /* background-color: red; */
 }
 .pop_up > form > button, .pop_up > button {
     width: 150px;
-    display: block;
+    display: inline-block;
     /* border: none; */
     font-size: 14px;
-    padding: 2px 3px 2px 3px !important;
+    padding: 2px 3px 2px 3px;
     margin: 4px 0 4px 0;
     text-align: left;
-    box-sizing: border-box;
 }
 /* >> hr style */
 .pop_up > .border_pup {
@@ -107,6 +115,8 @@
 }
 
 #pop_up_bar {
+    /* display: flex; */
+    /* border: solid; */
     width: 100%;
     position: fixed;
     z-index: -1;
@@ -138,15 +148,31 @@
 
 /* CONTENT BAR */
 #content_bar {
+    /* display: flex; */
+    /* border: solid; */
+    /* padding-top: 20px; */
+    /* overflow-x: auto; */
     min-height: calc(100vh - 75px);
     min-width: 530px;
 }
 #f_con_bar {
+    /*overflow-x: auto;*/           /*!!!!!!!!!!!!!!!!*/
     padding-top: 6px;
     padding-bottom: 6px;
     /* border: solid; */
     height: calc(100% - 12px);
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
     min-height: 300px;
+    /* margin-top: 7px;
+    margin-bottom: 7px; */
+    /* display: flex; */
+    /* align-items: center;
+    justify-content: center; */
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
 }
 #user_data {
     display: flex;
@@ -171,12 +197,15 @@
 
 /* SECOND BAR */
 #second_bar {
+    /* overflow-x: hidden; */                   /*!!!!!!!!!!!!!!!!*/
+    /* border: solid; */
     display: flex;
     flex-direction: row;
     align-items: center;
     height: 30px;
-    margin: 6px 0px 12px 0px;
-    width: calc(100%-12px);
+    margin: 6px 0px 12px 0px;                       /*!!!!!!!!!!!!!!!!*/
+    width: calc(100%-12px);                         /*!!!!!!!!!!!!!!!!*/
+    /* min-width: 500px; */
     padding: 0px 10px 0px 10px;
 }
 
@@ -193,7 +222,7 @@
     margin-left: 8px;
     padding: 0 7px 0 7px;
     border-radius: 4px;
-    border: 1px solid grey;
+    border: 1px solid grey;              /* Можна встановити і на інші кнопки, які з бордером */
     background-color: rgba(223, 223, 223, 0.8);
 }
 #second_bar > input {
@@ -202,8 +231,10 @@
 }
 
 #secb_ref_block {
+    /* border: solid; */
+    /* flex-shrink: 1; */
     flex: 1;
-    min-width: 250px;
+    min-width: 250px;       /*!!!!!!!!!!!!!!!!*/
     margin-right: auto;
 }
 .secbb_ref_item {
@@ -232,16 +263,11 @@
 
 /* CONTENT */
 .title1 {
+    /* border: solid; */
+    /* min-width: 500px; */
+    /* height: 60px; */
     font-size: 21px;
     margin: 30px 30px 0 30px;
-}
-.title2 {
-    font-size: 18px;
-    margin: 24px 50px 0 50px;
-}
-.title3 {
-    font-size: 16px;
-    margin: 20px 70px 0 70px;
 }
 .border_t1 {
     /* width: 145px; */
@@ -249,18 +275,19 @@
     height: 1.5px;
     background-color: black;
 }
+.title2 {
+    font-size: 18px;
+    margin: 20px 50px 0 50px;
+}
 .border_t2 {
     /* width: 145px; */
     margin-top: 5px;
     height: 1px;
     background-color: black;
 }
-.border_t3 {
-    /* width: 145px; */
-    margin-top: 5px;
-    height: 0.8px;
-    background-color: black;
-}
+/* .border_t2 {
+
+} */
 
 /* Block of items */
 .enum_block_shape {
@@ -273,6 +300,10 @@
     padding: 20px 50px 0 50px;
     /* border: solid; */
 }
+/* .form_en_bl {
+    width: 100%;
+    height: 100%;
+} */
 .it_bl_st {
     width: calc((100% - 100px)*0.3103448276);
     margin-right: calc((100% - 100px)*0.02298850575);
@@ -299,6 +330,9 @@
     flex-direction: column;
     /* width: calc(100%*0.1*2); */
 }
+/* .fir_ex_but {
+    margin-bottom: 6px;
+} */
 .enum_extra_button {
     font-size: 14px;
     background-color: rgb(255, 255, 255);
@@ -310,16 +344,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* padding-left: 10px; */
+    /* margin-bottom: 10px; */
+    /* width: calc(100%*0.3); */
 }
 
 /* Descriprion */
-.descrip_block2 {
-    padding: 15px 50px 0 50px;/* 15px - top */
-}
-.descrip_block3 {
-    padding: 15px 70px 0 70px;/* 15px - top */
+.descrip_block {
+    padding: 15px 50px 0 50px;
 }
 .inline_title {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
 }
 .inline_element {
     /* border: solid; */
@@ -341,6 +378,8 @@
 /* ADD BAR */
 #add_bar {
     background-color: rgba(170, 170, 170, 0.8);
+    /* display: block; */
+    /* border: solid; */
     height: 30px;
     min-width: 530px;
     /* border-radius: 5px; */
@@ -352,6 +391,11 @@
 #text_add {
     font-size: 15px;
 }
+
+
+
+
+
 
 
 

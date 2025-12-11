@@ -19,7 +19,6 @@
 /* GENERAL BAR */
 #general_bar {
     background-color: rgba(170, 170, 170, 0.8);
-    /* border: solid; */
     height: 45px;
     min-width: 530px;
 }
@@ -89,13 +88,12 @@
 }
 .pop_up > form > button, .pop_up > button {
     width: 150px;
-    display: block;
+    display: inline-block;
     /* border: none; */
     font-size: 14px;
-    padding: 2px 3px 2px 3px !important;
+    padding: 2px 3px 2px 3px;
     margin: 4px 0 4px 0;
     text-align: left;
-    box-sizing: border-box;
 }
 /* >> hr style */
 .pop_up > .border_pup {
@@ -235,30 +233,20 @@
     font-size: 21px;
     margin: 30px 30px 0 30px;
 }
-.title2 {
-    font-size: 18px;
-    margin: 24px 50px 0 50px;
-}
-.title3 {
-    font-size: 16px;
-    margin: 20px 70px 0 70px;
-}
 .border_t1 {
     /* width: 145px; */
     margin-top: 5px;
     height: 1.5px;
     background-color: black;
 }
+.title2 {
+    font-size: 18px;
+    margin: 20px 50px 0 50px;
+}
 .border_t2 {
     /* width: 145px; */
     margin-top: 5px;
     height: 1px;
-    background-color: black;
-}
-.border_t3 {
-    /* width: 145px; */
-    margin-top: 5px;
-    height: 0.8px;
     background-color: black;
 }
 
@@ -313,13 +301,13 @@
 }
 
 /* Descriprion */
-.descrip_block2 {
-    padding: 15px 50px 0 50px;/* 15px - top */
-}
-.descrip_block3 {
-    padding: 15px 70px 0 70px;/* 15px - top */
+.descrip_block {
+    padding: 15px 50px 0 50px;
 }
 .inline_title {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
 }
 .inline_element {
     /* border: solid; */
@@ -352,6 +340,8 @@
 #text_add {
     font-size: 15px;
 }
+
+
 
 
 
