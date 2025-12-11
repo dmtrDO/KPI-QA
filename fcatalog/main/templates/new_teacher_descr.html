@@ -1,0 +1,123 @@
+<!-- Сторінка тільки для викладача -->
+<!-- base page of teacher -->
+<!-- from v1 -->
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Опис дисципліни</title>
+    <link rel="stylesheet" href="{% static 'css/new_st_teacher_descr.css' %}">
+</head>
+<body>
+    <div id="general_bar">
+        <div class="frame" id="f_gen_bar">
+            <button id="b_menu" class="gen_butt">Меню</button>
+            <form id="f_logo" action="{% url 'teacher_discips' %}">
+                <button id="b_logo">Fcatalog</button>
+            </form>
+            <button id="b_account" class="gen_butt">Обліковий запис</button>
+        </div>
+    </div>
+
+
+    <div id="pop_up_bar">
+        <div id="pop_up_wins">
+            <div id="menu_menu" class="pop_up">
+                <form class="menu" action="{% url 'teacher_discips' %}">
+                    <button id="lalka1" type="submit">На головну</button>
+                </form>
+                <form class="menu" action="{% url 'teacher_discips' %}">
+                    <button id="lalka3" type="submit">Назад</button>
+                </form>
+                <button type="reset" class="lalka update-btn" onclick="openPopup()">Додати дисципліну</button>
+                <!-- <div class="border_pup"></div>
+                <form class="menu">
+                    <button id="lalka2" type="submit">Про нас</button>
+                </form> -->
+            </div>
+            <div id="menu_account" class="pop_up">
+                <div class="account">teacher2@gmail.com</div>
+                <form class="account" action="{% url 'logout' %}">
+                    <button id="palka2">Вийти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="content_bar">
+        <div class="frame" id="f_con_bar">
+            <div id="second_bar">
+                <div id="secb_ref_block">
+                    <label class="secbb_ref_item">Викладач</label>
+                    > <a class="secbb_ref_item" href="{% url 'teacher_discips' %}">Дисципліни</a>
+                    > <label class="secbb_ref_item">Дисципліна</label>
+                </div>
+                <form id="secb_right_form" action="{% url 'teacher_discips' %}">
+                    <button id="secb_b0" class="secb_b">Назад</button>
+                </form>
+            </div>
+
+            <div class="content">
+                <div class="title1">
+                    <label class="text">{{discipline.title}}</label>
+                    <div class="border_t1"></div>
+                </div>
+
+                <div class="title2 inline_title">
+                    <div class="inline_element">
+                        <label class="text">Викладач:</label>
+                        <div class="inline_delimiter"></div>
+                        <label class="text">Ви:&nbsp;&nbsp;&nbsp;{{discipline.teacher}}</label>
+                    </div>
+                    <div class="border_t2"></div>
+                </div>
+
+                <div class="title2">
+                    <label class="text">Опис</label>
+                    <div class="border_t2"></div>
+                </div>
+
+                <div class="descrip_block">
+                    <label class="text">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{discipline.description}}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="popup" id="popup">
+            <div class="popup__body">
+                <form method="POST" class="popup__content">
+                    {% csrf_token %}
+                    <input type="hidden" name="type_page" value="new_discipline">
+                    <label for="id_title">Назва:</label>
+                    {{ form.title }}
+                    <label for="id_description">Опис:</label>
+                    {{ form.description }}
+                    <button class="in_add_disc" type="submit">Додати</button>
+                    <p class="err">{{ error }}</p>
+                </form>
+            </div>
+        </div>
+
+        
+        <div class="space_end"></div>
+    </div>
+    
+
+    <div id="add_bar">
+        <div class="frame" id="f_add_bar">
+            <label id="text_add">Київ - 2025</label>
+        </div>
+    </div>
+
+    
+    <script src="{% static 'js/new_skr_teacher_descr.js' %}"></script>
+</body>
+</html>

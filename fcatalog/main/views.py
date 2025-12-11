@@ -19,6 +19,10 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.ttfonts import TTFont
 
+from urllib.parse import urlencode
+from django.urls import reverse
+
+
 ###########################################################################
 # webhook
 import subprocess
@@ -34,9 +38,9 @@ def github_webhook(request):
         subprocess.Popen(["/bin/bash", "/home/librwebapp/update_site.sh"])
         return HttpResponse("Update started", status=200)
     return HttpResponse("OK", status=200)
-
-
 ############################################################################
+
+
 
 
 def download(disciplines):
@@ -136,6 +140,8 @@ def download(disciplines):
     return FileResponse(buffer, as_attachment=True, filename="disciplines-catalog.pdf")
 
 
+
+
 @csrf_exempt
 def index(request):
     disciplines = Discipline.objects.filter(is_approved=True)
@@ -144,46 +150,115 @@ def index(request):
     return render(request, "index.html", {"disciplines": disciplines})
 
 
-def teacher(request):
+
+
+def teacher_discips(request):
+    context = {}
+
     email = request.session.get("email")
     if not email or not Teacher.objects.filter(email=email).exists():
         return redirect("login")
     form = AddDisciplineForm()
-    if request.method == "POST":
-        form = AddDisciplineForm(request.POST)
-        if form.is_valid():
-            title = form.cleaned_data["title"]
-            disciplines = Discipline.objects.filter(title=title)
-            for discipline in disciplines:
-                if discipline.is_approved == True:
-                    return render(
-                        request,
-                        "teacher.html",
-                        {
-                            "email": email,
-                            "form": form,
-                            "error": "Така дисципліна вже існує",
-                        },
-                    )
-            description = form.cleaned_data["description"]
-            Discipline.objects.create(
-                title=title,
-                description=description,
-                teacher=Teacher.objects.get(email=email),
-                admin=User.objects.get(id=1),
-            )
 
-    return render(
-        request,
-        "teacher.html",
-        {
-            "email": email,
-            "form": form,
-        },
-    )
+    disciplines = Discipline.objects.filter(is_approved=True)
+    array = []
+    num = 0
+    if disciplines is not None:
+        buff_arr = []
+        for num2 in range(len(disciplines)):
+            if disciplines[num2].teacher.email==email:
+                num = num + 1
+                buff_arr.append(disciplines[num2])
+                if num==3 or num2+1==len(disciplines) :
+                    num = 0
+                    array.append(buff_arr.copy())
+                    buff_arr = []
+    context['disciplines'] = array
+
+    if request.session.get('type_out') is None:
+        request.session['type_out'] = 0
+
+    if request.method == "POST":
+        type_page = request.POST.get('next_page')
+        id_item = request.POST.get('id')
+        type_out = request.POST.get('type_out')
+        if type_page is not None and type_page=='new_discipline':
+            form = AddDisciplineForm(request.POST)
+            if form.is_valid():
+                title = form.cleaned_data["title"]
+                disciplines = Discipline.objects.filter(title=title)
+                for discipline in disciplines:
+                    if discipline.is_approved == True:
+                        context["email"] = email
+                        context["form"] = form
+                        context["error"] = "Така дисципліна вже існує"
+                        return render(request,"new_teacher_gen.html",context)
+                description = form.cleaned_data["description"]
+                Discipline.objects.create(
+                    title=title,
+                    description=description,
+                    teacher=Teacher.objects.get(email=email),
+                    admin=User.objects.get(id=1),)
+        elif type_out is not None:
+            if request.session.get('type_out')==0:
+                request.session['type_out'] = 1
+            else:
+                request.session['type_out'] = 0
+        elif id_item is not None:
+            obj1 = reverse("teacher_descrip")
+            obj2 = urlencode({"id":id_item})
+            url = f"{obj1}?{obj2}"
+            return redirect(url)
+        else:
+            pass
+    
+    context["type_out"] = request.session.get('type_out')
+    context["email"] = email
+    context["form"] = form
+    return render(request,"new_teacher_choo.html",context)
+
+
+def teacher_descrip(request):
+    context = {}
+    id = request.GET.get('id')
+    object = Discipline.objects.get(id=id)
+    
+    email = request.session.get("email")
+    if not email or not Teacher.objects.filter(email=email).exists():
+        return redirect("login")
+    form = AddDisciplineForm()
+
+    if request.method == "POST":
+        type_page = request.POST.get('next_page')
+        if type_page is not None and type_page=='new_discipline':
+            form = AddDisciplineForm(request.POST)
+            if form.is_valid():
+                title = form.cleaned_data["title"]
+                disciplines = Discipline.objects.filter(title=title)
+                for discipline in disciplines:
+                    if discipline.is_approved == True:
+                        context["email"] = email
+                        context["form"] = form
+                        context["error"] = "Така дисципліна вже існує"
+                        return render(request,"new_teacher_gen.html",context)
+                description = form.cleaned_data["description"]
+                Discipline.objects.create(
+                    title=title,
+                    description=description,
+                    teacher=Teacher.objects.get(email=email),
+                    admin=User.objects.get(id=1),)
+
+    context['discipline'] = object
+    context["email"] = email
+    context["form"] = form
+    return render(request,"new_teacher_descr.html",context)
+
+
 
 
 def login(request):
+    context = {}
+
     form = TeacherLoginForm()
     if request.method == "POST":
         form = TeacherLoginForm(request.POST)
@@ -194,27 +269,20 @@ def login(request):
                 user = Teacher.objects.get(email=email)
                 if user.password == password:
                     request.session["email"] = email
-                    return redirect(
-                        "teacher",
-                    )
-            return render(
-                request,
-                "login.html",
-                {"form": form, "error": "Неправильна пошта або пароль"},
-            )
+                    return redirect("teacher_discips")
+            context["form"] = form
+            context["error"] = "Неправильна пошта або пароль"
+            return render(request,"new_login.html",context)
 
-    return render(
-        request,
-        "login.html",
-        {
-            "form": form,
-        },
-    )
+    context["form"] = form
+    return render(request,"new_login.html",context)
 
 
 def logout(request):
     request.session.flush()
     return redirect("/")
+
+
 
 
 def discipline_requests(request):

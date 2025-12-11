@@ -36,7 +36,7 @@ button:hover, a:hover {
     cursor: pointer;
 }
 
-input {
+#input_search {
     padding: 4px 10px;
     border: none;
     border-radius: 5px;

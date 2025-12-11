@@ -1,0 +1,52 @@
+<!-- Для звичайного користувача -->
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сторінка входу</title>
+    <link rel="stylesheet" href="{% static 'css/new_st_login.css' %}">
+</head>
+<body>
+    <div id="general_bar">
+        <div class="frame" id="f_gen_bar">
+            <form id="f_menu" action="{% url 'admin:login' %}">
+                <button id="b_menu" class="gen_butt">Авторизація адміністратора</button>
+            </form>
+            <form id="f_logo" action="{% url 'index' %}">
+                <button id="b_logo">Fcatalog</button>
+            </form>
+            <form id="f_account" action="{% url 'index' %}">
+                <button id="b_account" class="gen_butt">Назад</button>
+            </form>
+        </div>
+    </div>
+    
+
+    <div id="content_bar">
+        <div class="frame" id="f_con_bar">
+            <form id="user_data" class="login-form" method="POST">
+                {% csrf_token %}
+                <label id="text_auth">Авторизація викладача</label>
+                {{ form.email }}
+                {{ form.password }}
+                <button id="b_enter">Далі</button>
+                <div class="login_error">{{ error }}</div>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="add_bar">
+        <div class="frame" id="f_add_bar">
+            <label id="text_add">Київ - 2025</label>
+        </div>
+    </div>
+
+    
+    <script src="{% static 'js/new_skr_login.js' %}"></script>
+</body>
+</html>

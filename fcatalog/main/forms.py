@@ -6,6 +6,7 @@ class TeacherLoginForm(Form):
         widget=TextInput(
             attrs={
                 "id": "email",
+                "type": "text",
                 "placeholder": "Електронна пошта",
             }
         ),
@@ -16,6 +17,7 @@ class TeacherLoginForm(Form):
         widget=PasswordInput(
             attrs={
                 "id": "password",
+                "type": "password",
                 "placeholder": "Пароль",
             }
         ),
