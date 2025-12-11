@@ -146,7 +146,6 @@ def download(disciplines):
 def index(request):
     disciplines = Discipline.objects.filter(is_approved=True)
     if request.method == "POST":
-        print("POST")
         return download(disciplines)
     return render(request, "index.html", {"disciplines": disciplines})
 
@@ -298,85 +297,3 @@ def discipline_requests(request):
             discipline.delete()
     disciplines = Discipline.objects.filter(is_approved=False)
     return render(request, "discipline_requests.html", {"disciplines": disciplines})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def teacher_gen(request):
-#     context = {}
-
-#     disciplines = Discipline.objects.filter(is_approved=True)
-#     array_disc = []
-#     for i in range(2):
-#         if disciplines[i] is not None:
-#             array_disc.append(disciplines[i])
-#     context['disciplines'] = array_disc
-
-#     email = request.session.get("email")
-#     if not email or not Teacher.objects.filter(email=email).exists():
-#         return redirect("login")
-#     form = AddDisciplineForm()
-#     if request.method == "POST":
-#         type_page = request.POST.get('next_page')
-#         id_item = request.POST.get('id')
-#         if type_page is not None and type_page=='discips':
-#             print("disciplinesss")
-#             return redirect("teacher_discips")
-#         elif type_page is not None and type_page=='new_discipline':
-#             form = AddDisciplineForm(request.POST)
-#             if form.is_valid():
-#                 title = form.cleaned_data["title"]
-#                 disciplines = Discipline.objects.filter(title=title)
-#                 for discipline in disciplines:
-#                     if discipline.is_approved == True:
-#                         context["email"] = email
-#                         context["form"] = form
-#                         context["error"] = "Така дисципліна вже існує"
-#                         return render(request,"new_teacher_gen.html",context)
-#                 description = form.cleaned_data["description"]
-#                 Discipline.objects.create(
-#                     title=title,
-#                     description=description,
-#                     teacher=Teacher.objects.get(email=email),
-#                     admin=User.objects.get(id=1),)
-#             print("new_disc")
-#         elif id_item is not None:
-#             print("discipline")
-#             return redirect("teacher_descrip")
-#         else:
-#             pass
-
-#     context["email"] = email
-#     context["form"] = form
-#     return render(request,"new_teacher_gen.html",context)
-
-
-
-# def general(request):
-#     return render(request, "general.html")
-
-
-
-# def test_exec(request):
-#     return render(request,"new_teacher_descr.html")
-
-
-
-# def general_discips(request):
-#     return render(request, "new_general_discips.html")
-
-
-
-# def general_descrip(request):
-#     return render(request, "new_general_descrip.html")
